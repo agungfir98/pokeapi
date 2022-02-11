@@ -8,7 +8,7 @@ const client = new ApolloClient({
   uri: "https://graphql-pokeapi.graphcdn.app/",
   cache: new InMemoryCache(),
 });
-
+// client.refetchQueries()
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>

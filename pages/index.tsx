@@ -1,64 +1,14 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
 import Pokeown from "./components/pokeown";
-
-import { useQuery, gql } from "@apollo/client";
-
-const GET_DATA = gql`
-  query getSome($name: String!, $limit: Int) {
-    pokemons(limit: $limit) {
-      results {
-        name
-        id
-        image
-      }
-    }
-    pokemon(name: $name) {
-      name
-      stats {
-        stat {
-          name
-        }
-      }
-      abilities {
-        ability {
-          name
-        }
-      }
-      moves {
-        move {
-          name
-        }
-      }
-    }
-  }
-`;
+import Pokemon from "./components/pokemon";
 
 const Home: NextPage = () => {
-  const { loading, error, data } = useQuery(GET_DATA);
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>error {error.message}</p>;
-  }
-
-  const Maped = data.pokemons.results.map((i: any) => {
-    console.log(i);
-    return (
-      <ul key={i.id}>
-        <li>{i.name}</li>
-      </ul>
-    );
-  });
-  // useEffect(() => {}, []);
-
   return (
-    <div className="-z-50 h-screen begron ">
+    <div className="-z-50 h-screen">
       <div className="flex justify-center">
         <Pokeown />
       </div>
-      {Maped}
+      <Pokemon />
       {/* <div className="w-48 h-48 bg-red-700 flex justify-center  place-items-center">
         <div className="w-20 h-20 bg-slate-400"></div>
       </div>
