@@ -7,13 +7,16 @@ import { pokemons } from "../../type/type";
 
 export default function Pokemon() {
   const [detik, setDetik] = useState(1);
+  const [limit, setLimit] = useState(2);
 
   const { loading, error, data } = useQuery(GET_DATA, {
-    variables: { limit: 3, offset: detik },
+    variables: { limit: limit, offset: detik },
   });
 
   useEffect(() => {
+    const rand = Math.floor(Math.random() * 3) + 3;
     const rand2 = Math.floor(Math.random() * 1123) + 1;
+    setLimit(rand);
     setDetik(rand2);
   }, []);
 

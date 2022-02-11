@@ -28,6 +28,11 @@ export const GET_DETAIL = gql`
       sprites {
         front_default
       }
+      types {
+        type {
+          name
+        }
+      }
       stats {
         stat {
           name

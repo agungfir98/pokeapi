@@ -1,8 +1,9 @@
-import { useQuery } from "@apollo/client";
+import { Tema } from "../../switch/switch";
 import Image from "next/image";
 import { GET_DETAIL } from "../../graphql/graphql";
 import { useRouter } from "next/router";
-import { stat, move } from "../../type/type";
+import { stat, move, tipe } from "../../type/type";
+import { useQuery } from "@apollo/client";
 
 export default function Detail() {
   const router = useRouter();
@@ -15,16 +16,33 @@ export default function Detail() {
   if (loading) return <p>Loading... </p>;
   if (error) return <p>error {error.message}</p>;
 
-  const { name, stats, sprites } = data.pokemon;
+  const { name, stats, sprites, types } = data.pokemon;
   const move = data.pokemon.moves;
 
-  move.map((i: move) => {
-    // console.log(i.move.name);
-  });
+  function bgPokeType() {
+    return types.map((i: tipe) => {
+      return i.type.name;
+    })[0];
+  }
+
+  function tipe() {
+    return types.map((i: tipe) => {
+      return (
+        <div
+          className="flex justify-center font-medium m-1 my-5"
+          key={i.type.name}
+        >
+          <div className={`rounded-md ${Tema(i.type.name)} p-2`}>
+            {i.type.name}
+          </div>
+        </div>
+      );
+    });
+  }
 
   return (
-    <div className="mb-64 bg-stone-700 justify-center">
-      <div className="m-auto pt-11 flex abso justify-center self-center">
+    <div className={`${Tema(bgPokeType())} min-h-screen justify-center`}>
+      <div className="m-auto pt-11 flex justify-center self-center">
         <Image
           className="drop-shadow-2xl"
           src={sprites.front_default}
@@ -33,31 +51,40 @@ export default function Detail() {
           height={200}
         />
       </div>
+      <div className="coba from-red-500 to-pink-500"></div>
 
-      <div className="bg-white -mt-20 rounded-t-3xl container justify-center">
-        <h1 className="text-gray-800 font-bebas font-medium drop-shadow-md row-span-1 text-center pt-12 text-4xl z-50">
+      <div className="bg-white -mt-20 min-h-full rounded-t-3xl container mx-auto justify-center text-center">
+        <h1 className="text-gray-800 tracking-widest font-bebas font-medium drop-shadow-md row-span-1 text-center pt-12 text-4xl z-50">
           {name.toUpperCase()}
         </h1>
-        <div className="mt-10 flex justify-center text-center">
+        {/* ============================== */}
+        <div className="flex justify-center">{tipe()}</div>
+        {/* ============================== */}
+        {/* ============================== STATS ============================== */}
+        <h2 className="text-xl mb-3 mt-2 font-bold text-gray-800">Stats</h2>
+        <div className="flex justify-center text-center">
           <div className="grid grid-cols-2 gap-3 w-3/4">
             {stats.map((i: stat) => {
               return (
                 <div key={i.base_stat}>
-                  <div className="font-semibold p-1">{i.stat.name}</div>
-                  <div>{i.base_stat}</div>
+                  <div className="font-extrabold tracking-wider p-1 text-gray-800">
+                    {i.stat.name}
+                  </div>
+                  <div className="text-gray-800">{i.base_stat}</div>
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div className="container mx-auto text-center  mt-10">
-          <h2 className="text-xl mb-3 font-bold">Moves</h2>
-          <div className="mx-auto flex flex-wrap justify-center">
+        {/* ============================== MOVES ============================== */}
+        <div className="sm:mx-20 text-center pb-1 mt-10">
+          <h2 className="text-xl mb-3 font-bold text-gray-800">Moves</h2>
+          <div className="mb-20 flex flex-wrap justify-center">
             {move.map((i: move) => {
               return (
-                <div className="flex font-medium m-2" key={i.move.name}>
-                  <div className="rounded-md text-white bg-pokeyelow p-2">
+                <div className="font-medium m-1" key={i.move.name}>
+                  <div className={`rounded-md w-fit ${Tema(bgPokeType())} p-2`}>
                     {i.move.name}
                   </div>
                 </div>
