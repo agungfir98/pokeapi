@@ -6,13 +6,15 @@ import { myPoke, tangkap } from "../../type/type";
 export default function TangkapBtn(pokemon: tangkap) {
   const Myswal = withReactContent(swal);
 
-  const [getLocalData, setGetLocalData] = useState(
-    JSON.parse(localStorage.getItem("koleksi") || "[]")
-  );
+  const koleksi = JSON.parse(localStorage.getItem("koleksi") || "[]");
+
+  const [getLocalData, setGetLocalData] = useState(koleksi);
 
   useEffect(() => {
     localStorage.setItem("koleksi", JSON.stringify(getLocalData));
-    setGetLocalData(JSON.parse(localStorage.getItem("koleksi") as string));
+    setGetLocalData(
+      JSON.parse(localStorage.getItem("koleksi") || ("[]" as string))
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
