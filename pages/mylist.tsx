@@ -9,7 +9,7 @@ import { myPoke } from "../type/type";
 const MySwal = withReactContent(Swal);
 export default function Mylist() {
   const [data, setData] = useState([]);
-  const [koleksi, setKoleksi] = useState();
+  const [koleksi, setKoleksi] = useState(0);
 
   useEffect(() => {
     const datas = JSON.parse(localStorage.getItem("koleksi") as string);
