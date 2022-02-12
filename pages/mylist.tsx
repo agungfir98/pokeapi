@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { myPoke } from "../type/type";
 
 const MySwal = withReactContent(Swal);
 export default function Mylist() {
@@ -11,14 +12,16 @@ export default function Mylist() {
   const [koleksi, setKoleksi] = useState();
 
   useEffect(() => {
-    const datas = JSON.parse(localStorage.getItem("koleksi"));
-    const koleksi = JSON.parse(localStorage.getItem("jumlah_koleksi"));
+    const datas = JSON.parse(localStorage.getItem("koleksi") as string);
+    const koleksi = JSON.parse(
+      localStorage.getItem("jumlah_koleksi") as string
+    );
     setKoleksi(koleksi);
     setData(datas);
   }, []);
 
   function release(nick: string) {
-    data.map((v: myPoke, i: number) => {
+    data.map((v: { nickname: string }, i: number) => {
       if (v.nickname == nick) {
         data.splice(i, 1);
       }
@@ -29,7 +32,9 @@ export default function Mylist() {
   }
 
   function delItem(nick: string) {
-    const updateData = [...data].filter((i: myPoke) => i.nickname !== nick);
+    const updateData = [...data].filter(
+      (i: { nickname: string }) => i.nickname !== nick
+    );
     setData(updateData);
     console.log(updateData);
   }
