@@ -1,12 +1,21 @@
+import { useEffect, useState } from "react";
 import swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { tangkap } from "../../type/type";
 
-export default function tangkapbtn(pokemon: tangkap) {
+export default function TangkapBtn(pokemon: tangkap) {
   const Myswal = withReactContent(swal);
 
-  const getLocalStorage = JSON.parse(localStorage.getItem("koleksi") || "[]");
+  const [getLocalData, setGetLocalData] = useState(
+    [] as { nickname: string; nama: string; img: string; tipe: [string] }[]
+  );
 
+  useEffect(() => {
+    const getLocalStorage = JSON.parse(
+      localStorage.getItem("koleksi" || "[]") as string
+    );
+    setGetLocalData(getLocalStorage);
+  }, []);
   const { nama, img, tipe } = pokemon;
 
   async function Catch(name: string) {
@@ -29,8 +38,13 @@ export default function tangkapbtn(pokemon: tangkap) {
         confirmButtonText: "submit",
         cancelButtonText: "batal",
       }).then((res) => {
-        const simpan = getLocalStorage;
-        const data = {
+        const simpan = getLocalData;
+        const data: {
+          nickname: string;
+          nama: string;
+          img: string;
+          tipe: [string];
+        } = {
           nickname: res.value,
           nama,
           img,
@@ -44,7 +58,7 @@ export default function tangkapbtn(pokemon: tangkap) {
             timer: 1000,
           });
           simpan.push(data);
-          const jumlah = simpan.length;
+          const jumlah = simpan.length.toString();
           localStorage.setItem("jumlah_koleksi", jumlah);
           localStorage.setItem("koleksi", JSON.stringify(simpan));
         }
