@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { tangkap } from "../../type/type";
+import { myPoke, tangkap } from "../../type/type";
 
 export default function TangkapBtn(pokemon: tangkap) {
   const Myswal = withReactContent(swal);
@@ -18,7 +18,18 @@ export default function TangkapBtn(pokemon: tangkap) {
   }, []);
   const { nama, img, tipe } = pokemon;
 
-  async function Catch(name: string) {
+  function Simpan(data: myPoke) {
+    let newData = data;
+    let aray = [];
+    aray.push(newData);
+    let str = aray.length;
+    if (localStorage) {
+      localStorage.setItem("jumlah_koleksi", str.toString());
+      localStorage.setItem("koleksi", JSON.stringify(aray));
+    }
+  }
+
+  function Catch(name: string) {
     const rand = Math.random() < 0.5 ? 0 : 1;
     if (rand === 0) {
       Myswal.fire({
@@ -38,7 +49,7 @@ export default function TangkapBtn(pokemon: tangkap) {
         confirmButtonText: "submit",
         cancelButtonText: "batal",
       }).then((res) => {
-        const simpan = getLocalData;
+        let simpan = getLocalData;
         const data: {
           nickname: string;
           nama: string;
@@ -57,10 +68,7 @@ export default function TangkapBtn(pokemon: tangkap) {
             showConfirmButton: false,
             timer: 1000,
           });
-          simpan.push(data);
-          const jumlah = simpan.length.toString();
-          localStorage.setItem("jumlah_koleksi", jumlah);
-          localStorage.setItem("koleksi", JSON.stringify(simpan));
+          Simpan(data);
         }
       });
     }

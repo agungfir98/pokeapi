@@ -27,8 +27,10 @@ export default function Mylist() {
       }
     });
     const count = data.length.toString();
-    localStorage.setItem("jumlah_koleksi", count);
-    localStorage.setItem("koleksi", JSON.stringify(data));
+    if (localStorage) {
+      localStorage.setItem("jumlah_koleksi", count);
+      localStorage.setItem("koleksi", JSON.stringify(data));
+    }
   }
 
   function delItem(nick: string) {
@@ -36,7 +38,6 @@ export default function Mylist() {
       (i: { nickname: string }) => i.nickname !== nick
     );
     setData(updateData);
-    console.log(updateData);
   }
 
   return (
