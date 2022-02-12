@@ -12,6 +12,7 @@ export default function TangkapBtn(pokemon: tangkap) {
 
   useEffect(() => {
     localStorage.setItem("koleksi", JSON.stringify(getLocalData));
+    setGetLocalData(JSON.parse(localStorage.getItem("koleksi") as string));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,7 +59,7 @@ export default function TangkapBtn(pokemon: tangkap) {
           let arr = getLocalData;
           arr.push(data);
           let jumlah = arr.length;
-          if (localStorage) {
+          if (typeof window !== "undefined") {
             localStorage.setItem("jumlah_koleksi", JSON.stringify(jumlah));
             localStorage.setItem("koleksi", JSON.stringify(arr));
           }
