@@ -58,8 +58,10 @@ export default function TangkapBtn(pokemon: tangkap) {
           let arr = getLocalData;
           arr.push(data);
           let jumlah = arr.length;
-          localStorage.setItem("jumlah_koleksi", JSON.stringify(jumlah));
-          localStorage.setItem("koleksi", JSON.stringify(arr));
+          if (localStorage) {
+            localStorage.setItem("jumlah_koleksi", JSON.stringify(jumlah));
+            localStorage.setItem("koleksi", JSON.stringify(arr));
+          }
         }
       });
     }
