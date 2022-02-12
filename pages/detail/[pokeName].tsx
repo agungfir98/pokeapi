@@ -3,6 +3,9 @@ import { GET_DETAIL } from "../../graphql/graphql";
 import { useRouter } from "next/router";
 import { stat, move, tipe } from "../../type/type";
 import { useQuery } from "@apollo/client";
+import BackBtn from "../components/backbtn";
+import TangkapBtn from "../components/tangkapbtn";
+import { type } from "os";
 
 export default function Detail() {
   const router = useRouter();
@@ -86,8 +89,16 @@ export default function Detail() {
     });
   }
 
+  function jenis() {
+    return types.map((i: tipe) => {
+      return i.type.name;
+    });
+  }
+
   return (
     <div className={`${Tema(bgPokeType())} min-h-screen justify-center`}>
+      <BackBtn />
+      <TangkapBtn nama={name} img={sprites.front_default} tipe={jenis()} />
       <div className="m-auto pt-11 flex justify-center self-center">
         <Image
           className="drop-shadow-2xl"

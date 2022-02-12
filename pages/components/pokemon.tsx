@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
-import Image from "next/image";
 import { GET_DATA } from "../../graphql/graphql";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { pokemons } from "../../type/type";
+import Navbar from "./navbar";
 
 export default function Pokemon() {
   const [detik, setDetik] = useState(1);
@@ -36,6 +37,7 @@ export default function Pokemon() {
   }
   return (
     <div className="container inline-flex flex-wrap container my-10 mb-20 justify-center">
+      <Navbar />
       {data.pokemons.results.map((i: pokemons) => {
         return (
           <Link key={i.id} href={`/detail/${i.name}`} passHref>

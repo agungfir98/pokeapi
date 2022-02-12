@@ -26,3 +26,9 @@ export type tipe = {
     id: number;
   };
 };
+
+export type tangkap = {
+  nama: string;
+  img: string;
+  tipe: [string];
+};
