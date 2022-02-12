@@ -12,7 +12,7 @@ export default function Pokeown() {
   return (
     <div className="text-md h-10 place-items-center flex absolute top-0 justify-center w-56 bg-pokered mx-auto rounded-b-xl">
       <h2 className="text-center text-white font-semibold">
-        Pokemon Owned: {count}{" "}
+        Pokemon Owned: {count < 1 ? 0 : count}
       </h2>
     </div>
   );
