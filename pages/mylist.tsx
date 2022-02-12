@@ -12,12 +12,8 @@ export default function Mylist() {
   const [koleksi, setKoleksi] = useState(0);
 
   useEffect(() => {
-    const datas = JSON.parse(localStorage.getItem("koleksi") as string);
-    const koleksi = JSON.parse(
-      localStorage.getItem("jumlah_koleksi") as string
-    );
-    setKoleksi(koleksi);
-    setData(datas);
+    setData(JSON.parse(localStorage.getItem("koleksi") as string));
+    setKoleksi(JSON.parse(localStorage.getItem("jumlah_koleksi") as string));
   }, []);
 
   function release(nick: string) {
@@ -39,6 +35,7 @@ export default function Mylist() {
     );
     setData(updateData);
   }
+  console.log(data);
 
   return (
     <div className="container p-5 h-screen mx-auto text-center">
