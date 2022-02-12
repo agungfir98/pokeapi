@@ -5,7 +5,6 @@ import { stat, move, tipe } from "../../type/type";
 import { useQuery } from "@apollo/client";
 import BackBtn from "../components/backbtn";
 import TangkapBtn from "../components/tangkapbtn";
-import { type } from "os";
 
 export default function Detail() {
   const router = useRouter();

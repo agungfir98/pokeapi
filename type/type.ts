@@ -32,3 +32,10 @@ export type tangkap = {
   img: string;
   tipe: [string];
 };
+
+export type myPoke = {
+  nama: string;
+  img: string;
+  tipe: [string];
+  nickname: string;
+};
