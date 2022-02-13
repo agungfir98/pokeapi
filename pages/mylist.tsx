@@ -81,10 +81,10 @@ export default function Mylist() {
                           showConfirmButton: false,
                           timer: 1000,
                         });
+                        const nick = i.nickname;
+                        delItem(nick);
+                        release(nick);
                       }
-                      const nick = i.nickname;
-                      delItem(nick);
-                      release(nick);
                     });
                   }}
                   className="text-center rounded-r-3xl w-1/4"

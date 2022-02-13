@@ -37,6 +37,12 @@ export default function TangkapBtn(pokemon: tangkap) {
         title: <p>{name.toUpperCase()} Berhasil ditangkap!</p>,
         text: "Beri dia nama",
         input: "text",
+        inputValue: `${nama}`,
+        inputValidator: (value) => {
+          if (value.length > 10 || !value) {
+            return `nama tidak valid`;
+          }
+        },
         inputAttributes: {
           autocapitalize: "off",
         },
