@@ -97,7 +97,9 @@ export default function Detail() {
   return (
     <div className={`${Tema(bgPokeType())} min-h-screen justify-center`}>
       <BackBtn />
-      <TangkapBtn nama={name} img={sprites.front_default} tipe={jenis()} />
+      {window !== undefined ? (
+        <TangkapBtn nama={name} img={sprites.front_default} tipe={jenis()} />
+      ) : null}
       <div className="m-auto pt-11 flex justify-center self-center">
         <Image
           className="drop-shadow-2xl"
