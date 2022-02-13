@@ -4,11 +4,16 @@ import { useRouter } from "next/router";
 import { stat, move, tipe } from "../../type/type";
 import { useQuery } from "@apollo/client";
 import BackBtn from "../components/backbtn";
-import TangkapBtn from "../components/tangkapbtn";
+// import TangkapBtn from "../components/tangkapbtn";
+import dynamic from "next/dynamic";
 
 export default function Detail() {
   const router = useRouter();
   const { pokeName } = router.query;
+
+  const KomponenDinamis = dynamic(() => import("../components/tangkapbtn"), {
+    ssr: false,
+  });
 
   const { loading, error, data } = useQuery(GET_DETAIL, {
     variables: { name: pokeName },
@@ -97,9 +102,7 @@ export default function Detail() {
   return (
     <div className={`${Tema(bgPokeType())} min-h-screen justify-center`}>
       <BackBtn />
-      {window !== undefined ? (
-        <TangkapBtn nama={name} img={sprites.front_default} tipe={jenis()} />
-      ) : null}
+      <KomponenDinamis nama={name} img={sprites.front_default} tipe={jenis()} />
       <div className="m-auto pt-11 flex justify-center self-center">
         <Image
           className="drop-shadow-2xl"
