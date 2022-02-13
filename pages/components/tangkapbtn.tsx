@@ -38,11 +38,6 @@ export default function TangkapBtn(pokemon: tangkap) {
         text: "Beri dia nama",
         input: "text",
         inputValue: `${nama}`,
-        inputValidator: (value) => {
-          if (value.length > 10 || !value) {
-            return `nama tidak valid`;
-          }
-        },
         inputAttributes: {
           autocapitalize: "off",
         },
