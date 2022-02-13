@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 import swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { tangkap } from "../../type/type";
@@ -24,6 +24,14 @@ export default function TangkapBtn(pokemon: tangkap) {
 
   const { nama, img, tipe } = pokemon;
 
+  // function validation(value) {
+  //   getLocalData.map( (i: {nickame:string})=> {
+  //     if(i.nickame === value) {
+  //       return
+  //     }
+  //   })
+  // }
+
   function Catch(name: string) {
     const rand = Math.random() < 0.5 ? 0 : 1;
     if (rand === 0) {
@@ -44,6 +52,13 @@ export default function TangkapBtn(pokemon: tangkap) {
         showCancelButton: true,
         confirmButtonText: "submit",
         cancelButtonText: "batal",
+        preConfirm: (value) => {
+          getLocalData.map((i: { nickname: string }) => {
+            if (i.nickname === value) {
+              swal.showValidationMessage("Nickname already exist!");
+            }
+          });
+        },
       }).then((res: any) => {
         const data: {
           nickname: string;
