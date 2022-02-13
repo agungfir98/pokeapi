@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import BackBtn from "../components/backbtn";
 // import TangkapBtn from "../components/tangkapbtn";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 export default function Detail() {
   const router = useRouter();
@@ -102,7 +103,13 @@ export default function Detail() {
   return (
     <div className={`${Tema(bgPokeType())} min-h-screen justify-center`}>
       <BackBtn />
-      <KomponenDinamis nama={name} img={sprites.front_default} tipe={jenis()} />
+      <Suspense fallback={"loading ..."}>
+        <KomponenDinamis
+          nama={name}
+          img={sprites.front_default}
+          tipe={jenis()}
+        />
+      </Suspense>
       <div className="m-auto pt-11 flex justify-center self-center">
         <Image
           className="drop-shadow-2xl"
