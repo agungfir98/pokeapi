@@ -6,7 +6,12 @@ import { myPoke, tangkap } from "../../type/type";
 export default function TangkapBtn(pokemon: tangkap) {
   const Myswal = withReactContent(swal);
 
-  const [getLocalData, setGetLocalData] = useState(Array());
+  // const [getLocalData, setGetLocalData] = useState(Array());
+  const [getLocalData, setGetLocalData] = useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("koleksi") || ("[}" as string));
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem("koleksi", JSON.stringify(getLocalData));
