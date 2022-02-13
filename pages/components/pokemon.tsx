@@ -31,7 +31,7 @@ export default function Pokemon() {
   if (error) {
     return (
       <div className="h-screen w-screen align-middle justify-center">
-        <p className="mx-auto">Loading...</p>
+        <p className="mx-auto">Error: {error.message}</p>
       </div>
     );
   }

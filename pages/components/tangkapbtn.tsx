@@ -1,25 +1,26 @@
 import { useEffect, useState, useReducer } from "react";
 import swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { myPoke, tangkap } from "../../type/type";
+import { tangkap } from "../../type/type";
 
 export default function TangkapBtn(pokemon: tangkap) {
   const Myswal = withReactContent(swal);
 
-  // const [getLocalData, setGetLocalData] = useState(Array());
+  const [getJumlah, setGetJumlah] = useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("jumlah_koleksi") as string);
+    }
+  });
   const [getLocalData, setGetLocalData] = useState(() => {
     if (typeof window !== "undefined") {
-      return JSON.parse(localStorage.getItem("koleksi") || ("[}" as string));
+      return JSON.parse(localStorage.getItem("koleksi") || ("[]" as string));
     }
   });
 
   useEffect(() => {
     localStorage.setItem("koleksi", JSON.stringify(getLocalData));
-    setGetLocalData(
-      JSON.parse(localStorage.getItem("koleksi") || ("[]" as string))
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    localStorage.setItem("jumlah_koleksi", JSON.stringify(getJumlah));
+  }, [getLocalData, getJumlah]);
 
   const { nama, img, tipe } = pokemon;
 
@@ -42,7 +43,7 @@ export default function TangkapBtn(pokemon: tangkap) {
         showCancelButton: true,
         confirmButtonText: "submit",
         cancelButtonText: "batal",
-      }).then((res) => {
+      }).then((res: any) => {
         const data: {
           nickname: string;
           nama: string;
@@ -61,13 +62,13 @@ export default function TangkapBtn(pokemon: tangkap) {
             showConfirmButton: false,
             timer: 1000,
           });
+        }
+        if (typeof window !== "undefined") {
           let arr = getLocalData;
           arr.push(data);
           let jumlah = arr.length;
-          if (typeof window !== "undefined") {
-            localStorage.setItem("jumlah_koleksi", JSON.stringify(jumlah));
-            localStorage.setItem("koleksi", JSON.stringify(arr));
-          }
+          localStorage.setItem("jumlah_koleksi", JSON.stringify(jumlah));
+          localStorage.setItem("koleksi", JSON.stringify(arr));
         }
       });
     }
