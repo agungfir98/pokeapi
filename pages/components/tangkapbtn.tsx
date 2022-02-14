@@ -24,14 +24,6 @@ export default function TangkapBtn(pokemon: tangkap) {
 
   const { nama, img, tipe } = pokemon;
 
-  // function validation(value) {
-  //   getLocalData.map( (i: {nickame:string})=> {
-  //     if(i.nickame === value) {
-  //       return
-  //     }
-  //   })
-  // }
-
   function Catch(name: string) {
     const rand = Math.random() < 0.5 ? 0 : 1;
     if (rand === 0) {

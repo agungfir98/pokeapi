@@ -10,10 +10,12 @@ export default function Pokeown() {
     setCount(count);
   }, []);
   return (
-    <div className="text-md h-10 place-items-center flex absolute top-0 justify-center w-56 bg-pokered mx-auto rounded-b-xl">
-      <h2 className="text-center text-white font-semibold">
-        Pokemon Owned: {count < 1 ? 0 : count}
-      </h2>
+    <div className="absolute left-1/2 top-0 -ml-28">
+      <div className="text-md h-10 place-items-center flex absolute top-0 justify-center w-56 bg-pokered mx-auto rounded-b-xl">
+        <h2 className="text-center text-white font-semibold">
+          Pokemon Owned: {count < 1 ? 0 : count}
+        </h2>
+      </div>
     </div>
   );
 }

@@ -36,15 +36,23 @@ export default function Pokemon() {
     );
   }
   return (
-    <div className="container inline-flex flex-wrap container my-10 mb-20 justify-center">
+    <div className="container inline-flex flex-wrap container my-10 mb-20 justify-evenly">
       <Navbar />
       {data.pokemons.results.map((i: pokemons) => {
         return (
           <Link key={i.id} href={`/detail/${i.name}`} passHref>
-            <div className="w-32 m-5 block justify-center">
-              <h2 className="text-center">{i.name}</h2>
-              <div className="m-auto flex justify-center self-center">
-                <Image src={i.image} alt={i.name} width={75} height={75} />
+            <div className="w-24 md:w-32 m-5 block justify-evenly md:justify-center">
+              <h2 className="text-center font-medium text-white bg-black/20">
+                {i.name}
+              </h2>
+              <div className="m-auto flex justify-center self-center ">
+                <Image
+                  // className="w-32 h-32"
+                  src={i.image}
+                  alt={i.name}
+                  width={150}
+                  height={150}
+                />
               </div>
             </div>
           </Link>

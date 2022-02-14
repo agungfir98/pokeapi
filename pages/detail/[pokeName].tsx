@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { stat, move, tipe } from "../../type/type";
 import { useQuery } from "@apollo/client";
 import BackBtn from "../components/backbtn";
-// import TangkapBtn from "../components/tangkapbtn";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -25,6 +24,7 @@ export default function Detail() {
 
   const { name, stats, sprites, types } = data.pokemon;
   const move = data.pokemon.moves;
+  console.log(move < 1);
 
   const Tema = (tipe: string): string => {
     switch (tipe) {
@@ -121,7 +121,7 @@ export default function Detail() {
       </div>
       <div className="coba from-red-500 to-pink-500"></div>
 
-      <div className="bg-white -mt-20 min-h-full rounded-t-3xl container mx-auto justify-center text-center">
+      <div className="bg-white -mt-20 md:max-w-7xl min-h-full rounded-t-3xl container mx-auto justify-center text-center">
         <h1 className="text-gray-800 tracking-widest font-bebas font-medium drop-shadow-md row-span-1 text-center pt-12 text-4xl z-50">
           {name.toUpperCase()}
         </h1>
@@ -130,7 +130,7 @@ export default function Detail() {
         {/* ============================== */}
         {/* ============================== STATS ============================== */}
         <h2 className="text-xl mb-3 mt-2 font-bold text-gray-800">Stats</h2>
-        <div className="flex justify-center text-center">
+        <div className="flex lg:w-1/2 lg:mx-auto justify-center text-center">
           <div className="grid grid-cols-2 gap-3 w-3/4">
             {stats.map((i: stat) => {
               return (
@@ -146,20 +146,30 @@ export default function Detail() {
         </div>
 
         {/* ============================== MOVES ============================== */}
-        <div className="sm:mx-20 text-center pb-1 mt-10">
+        <div className="sm:mx-20 max-w-7xl text-center pb-1 mt-10">
           <h2 className="text-xl mb-3 font-bold text-gray-800">Moves</h2>
-          <div className="mb-20 flex flex-wrap justify-center">
-            {move.map((i: move) => {
-              return (
-                <div className="font-medium m-1" key={i.move.name}>
-                  <div className={`rounded-md w-fit ${Tema(bgPokeType())} p-2`}>
+          <div className="mb-20 max-w-7xl box-content flex flex-wrap justify-center">
+            {move.length < 1 ? (
+              <p className="text-gray-500 text-xl font-bold my-10">
+                {`${name} doesn't have moves`}
+              </p>
+            ) : (
+              move.map((i: move) => {
+                return (
+                  <div
+                    key={i.move.id}
+                    className={`font-medium m-1 rounded-md w-fit ${Tema(
+                      bgPokeType()
+                    )} p-2`}
+                  >
                     {i.move.name}
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
+        {/* ============================ END MOVES =========================== */}
       </div>
     </div>
   );

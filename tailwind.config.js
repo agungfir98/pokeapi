@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backroundImage: {
+        grassPixel: "url('./public/img/grass_BG.jpg')",
+      },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         bebas: ["Bebas Neue", "cursive"],
