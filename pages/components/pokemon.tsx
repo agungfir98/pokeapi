@@ -23,15 +23,23 @@ export default function Pokemon() {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen align-middle justify-center">
-        <p className="mx-auto">Loading...</p>
+      <div className="flex h-screen w-screen bg-pokeblue/70 align-middle justify-center">
+        <div className="my-auto">
+          <p className="animate-bounce mx-auto text-white text-2xl">
+            Loading...
+          </p>
+        </div>
       </div>
     );
   }
   if (error) {
     return (
-      <div className="h-screen w-screen align-middle justify-center">
-        <p className="mx-auto">Error: {error.message}</p>
+      <div className="flex h-screen w-screen bg-pokeblue/70 align-middle justify-center">
+        <div className="my-auto">
+          <p className="animate-bounce mx-auto text-white text-2xl">
+            Error: {error.message}
+          </p>
+        </div>
       </div>
     );
   }
@@ -42,12 +50,12 @@ export default function Pokemon() {
         return (
           <Link key={i.id} href={`/detail/${i.name}`} passHref>
             <div className="w-24 md:w-32 m-5 block justify-evenly md:justify-center">
-              <h2 className="text-center font-medium text-white bg-black/20">
+              <h2 className="text-center font-medium text-white bg-black/40">
                 {i.name}
               </h2>
               <div className="m-auto flex justify-center self-center ">
                 <Image
-                  // className="w-32 h-32"
+                  className="drop-shadow-2xl shadow-white"
                   src={i.image}
                   alt={i.name}
                   width={150}

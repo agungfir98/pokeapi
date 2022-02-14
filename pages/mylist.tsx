@@ -41,7 +41,7 @@ export default function Mylist() {
     <div className="container p-5 h-screen mx-auto text-center">
       <Navbar />
       <div className="pb-16">
-        <h1 className="text-center font-bold text-gray-800 text-4xl">
+        <h1 className="text-center font-bold text-gray-500 text-4xl">
           KOLEKSI
         </h1>
         {koleksi < 1 || !koleksi || koleksi === undefined ? (
@@ -53,14 +53,17 @@ export default function Mylist() {
         ) : (
           data.map((i: myPoke) => {
             return (
-              <div className="flex m-4 bg-red-400 rounded-3xl" key={i.nickname}>
+              <div
+                className="flex m-4 max-w-xl mx-auto bg-pokeblue rounded-3xl drop-shadow-xl"
+                key={i.nickname}
+              >
                 <Link href={`/detail/${i.nama}`} passHref>
-                  <div className="-ml-2">
+                  <div className="-ml-2 w-2/6 md:w-1/4">
                     <Image src={i.img} alt={i.nama} width={100} height={100} />
                   </div>
                 </Link>
                 <Link href={`/detail/${i.nama}`} passHref>
-                  <div className="w-1/2 text-left my-auto pl-3">
+                  <div className="w-2/3 md:w-2/3 text-left my-auto pl-3">
                     <div className="h-fit p-1">
                       <p className="font-bold text-lg text-white">{i.nama}</p>
                       <p className="font-medium text-white">{i.nickname}</p>
@@ -71,8 +74,8 @@ export default function Mylist() {
                   onClick={() => {
                     MySwal.fire({
                       icon: "warning",
-                      title: <p>Lepas {i.nickname}?</p>,
-                      confirmButtonText: "ya",
+                      title: <p>Release {i.nickname}?</p>,
+                      confirmButtonText: "confirm",
                       showCancelButton: true,
                     }).then((res) => {
                       if (res.isConfirmed) {
@@ -87,10 +90,10 @@ export default function Mylist() {
                       }
                     });
                   }}
-                  className="text-center rounded-r-3xl w-1/4"
+                  className="text-center rounded-r-3xl w-1/4 md:w-1/5"
                   type="button"
                 >
-                  <div className="flex justify-center align-middle font-bold">
+                  <div className="flex justify-center align-middle font-medium text-white">
                     RELEASE
                   </div>
                 </button>

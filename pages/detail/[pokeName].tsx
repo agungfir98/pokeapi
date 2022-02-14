@@ -19,8 +19,26 @@ export default function Detail() {
     variables: { name: pokeName },
   });
 
-  if (loading) return <p>Loading... </p>;
-  if (error) return <p>error {error.message}</p>;
+  if (loading)
+    return (
+      <div className="flex h-screen w-screen bg-pokeblue/60 align-middle justify-center">
+        <div className="my-auto">
+          <p className="animate-bounce mx-auto text-white text-2xl">
+            Loading...
+          </p>
+        </div>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex h-screen w-screen bg-pokeblue/60 align-middle justify-center">
+        <div className="my-auto">
+          <p className="animate-bounce mx-auto text-white text-2xl">
+            error {error.message}
+          </p>
+        </div>
+      </div>
+    );
 
   const { name, stats, sprites, types } = data.pokemon;
   const move = data.pokemon.moves;
@@ -151,7 +169,7 @@ export default function Detail() {
           <div className="mb-20 max-w-7xl box-content flex flex-wrap justify-center">
             {move.length < 1 ? (
               <p className="text-gray-500 text-xl font-bold my-10">
-                {`${name} doesn't have moves`}
+                {`${name} doesn't have any moves`}
               </p>
             ) : (
               move.map((i: move) => {

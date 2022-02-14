@@ -4,7 +4,7 @@ import Pokemon from "./components/pokemon";
 
 const Home: NextPage = () => {
   return (
-    <div className="-z-50 bg-[url('https://raw.githubusercontent.com/agungfir98/pokeapi/main/public/img/grass_BG.jpg')] h-screen">
+    <div className="-z-50 bg-blend-saturation bg-[url('https://raw.githubusercontent.com/agungfir98/pokeapi/main/public/img/grass_BG.jpg')] h-screen">
       <Pokeown />
       <Pokemon />
     </div>

@@ -29,13 +29,13 @@ export default function TangkapBtn(pokemon: tangkap) {
     if (rand === 0) {
       Myswal.fire({
         icon: "error",
-        title: <p>Oops, {name.toUpperCase()} lepas</p>,
+        title: <p>Oops, {name.toUpperCase()} evade!</p>,
       });
     } else {
       Myswal.fire({
         icon: "success",
-        title: <p>{name.toUpperCase()} Berhasil ditangkap!</p>,
-        text: "Beri dia nama",
+        title: <p>{name.toUpperCase()} Caught!</p>,
+        text: "Give it a name",
         input: "text",
         inputValue: `${nama}`,
         inputAttributes: {
@@ -43,7 +43,6 @@ export default function TangkapBtn(pokemon: tangkap) {
         },
         showCancelButton: true,
         confirmButtonText: "submit",
-        cancelButtonText: "batal",
         preConfirm: (value) => {
           getLocalData.map((i: { nickname: string }) => {
             if (i.nickname === value) {
@@ -66,7 +65,7 @@ export default function TangkapBtn(pokemon: tangkap) {
         if (res.isConfirmed) {
           Myswal.fire({
             icon: "success",
-            title: <p>Berhasil disimpan</p>,
+            title: <p>Saved</p>,
             showConfirmButton: false,
             timer: 1000,
           });
